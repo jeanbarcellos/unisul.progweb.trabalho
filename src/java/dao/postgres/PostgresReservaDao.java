@@ -8,11 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 import util.Log;
 
-import model.Curso;
-import dao.CursoDao;
+import model.Reserva;
+import dao.ReservaDao;
 
 /**
- * Classe PostgresCursoDao
+ * Classe PostgresReservaDao
  *
  * @author Jean Barcellos <jeanbarcellos@hotmail.com>
  * @date 09/10/2016
@@ -20,19 +20,19 @@ import dao.CursoDao;
  * @package dao
  *
  */
-public class PostgresCursoDao implements CursoDao {
+public class PostgresReservaDao implements ReservaDao {
 
     @Override
-    public boolean insert(Curso curso) {
+    public boolean insert(Reserva reserva) {
         Connection conn = null;
         PreparedStatement ps = null;
 
         try {
             conn = ConnectionFactory.open();
 
-            ps = conn.prepareStatement("INSERT INTO curso (id, nome) VALUES (?, ?)");
-            ps.setInt(1, curso.getId());
-            ps.setString(2, curso.getNome());
+            ps = conn.prepareStatement("INSERT INTO reserva (id, nome) VALUES (?, ?)");
+            ps.setInt(1, reserva.getId());
+//            ps.setString(2, reserva.getNome());
 
             int retorno = ps.executeUpdate();
 
@@ -56,16 +56,16 @@ public class PostgresCursoDao implements CursoDao {
     }
 
     @Override
-    public boolean update(Curso curso) {
+    public boolean update(Reserva reserva) {
         Connection conn = null;
         PreparedStatement ps = null;
 
         try {
             conn = ConnectionFactory.open();
 
-            ps = conn.prepareStatement("UPDATE curso SET nome = ? WHERE id = ? ;");
-            ps.setString(1, curso.getNome());
-            ps.setInt(2, curso.getId());
+            ps = conn.prepareStatement("UPDATE reserva SET nome = ? WHERE id = ? ;");
+//            ps.setString(1, reserva.getNome());
+            ps.setInt(2, reserva.getId());
 
             int retorno = ps.executeUpdate();
 
@@ -96,7 +96,7 @@ public class PostgresCursoDao implements CursoDao {
         try {
             conn = ConnectionFactory.open();
 
-            ps = conn.prepareStatement("DELETE FROM curso WHERE id = ? ;");
+            ps = conn.prepareStatement("DELETE FROM reserva WHERE id = ? ;");
             ps.setInt(1, id);
 
             int retorno = ps.executeUpdate();
@@ -121,8 +121,8 @@ public class PostgresCursoDao implements CursoDao {
     }
 
     @Override
-    public Curso load(int id) {
-        Curso curso = null;
+    public Reserva load(int id) {
+        Reserva reserva = null;
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -131,8 +131,8 @@ public class PostgresCursoDao implements CursoDao {
             conn = ConnectionFactory.open();
             
             String sql = "";
-            sql += "SELECT id, nome ";
-            sql += "FROM curso ";
+            sql += "SELECT id, data_inicio, data_fim, situacao, id_usuario, id_acomodacao ";
+            sql += "FROM reserva ";
             sql += "WHERE id = ? ";
             sql += "LIMIT 1";
 
@@ -142,9 +142,13 @@ public class PostgresCursoDao implements CursoDao {
             rs = ps.executeQuery();
             rs.next();
 
-            curso = new Curso();
-            curso.setId(rs.getInt("id"));
-            curso.setNome(rs.getString("nome"));
+            reserva = new Reserva();
+            reserva.setId(rs.getInt("id"));
+            reserva.setDataInicio(rs.getDate("data_inicio"));
+            reserva.setDataFim(rs.getDate("data_fim"));
+            reserva.setSituacao(rs.getString("situacao"));
+            reserva.setIdUsuario(Integer.parseInt(rs.getString("id_usuario")));
+            reserva.setIdAcomodacao(Integer.parseInt(rs.getString("id_acomodacao")));
 
         } catch (SQLException ex) {
             Log.write(ex.getErrorCode() + " - " + ex.getMessage());
@@ -164,12 +168,12 @@ public class PostgresCursoDao implements CursoDao {
             }
         }
 
-        return curso;
+        return reserva;
     }
 
     @Override
-    public List<Curso> all() {
-        List<Curso> cursos = new ArrayList<Curso>();
+    public List<Reserva> all() {
+        List<Reserva> reservas = new ArrayList<Reserva>();
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -177,17 +181,26 @@ public class PostgresCursoDao implements CursoDao {
         try {
             conn = ConnectionFactory.open();
 
-            ps = conn.prepareStatement("SELECT id, nome FROM curso ORDER BY id");
+            String sql = "";
+            sql += "SELECT id, data_inicio, data_fim, situacao, id_usuario, id_acomodacao ";
+            sql += "FROM reserva ";
+            sql += "ORDER BY id";
+
+            ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
 
             while (rs.next()) {
-                Curso curso = new Curso();
-                curso.setId(rs.getInt("id"));
-                curso.setNome(rs.getString("nome"));
-                cursos.add(curso);
+                Reserva reserva = new Reserva();
+                reserva.setId(rs.getInt("id"));
+                reserva.setDataInicio(rs.getDate("data_inicio"));
+                reserva.setDataFim(rs.getDate("data_fim"));
+                reserva.setSituacao(rs.getString("situacao"));
+                reserva.setIdUsuario(Integer.parseInt(rs.getString("id_usuario")));
+                reserva.setIdAcomodacao(Integer.parseInt(rs.getString("id_acomodacao")));
+                reservas.add(reserva);
             }
 
-        } catch (SQLException ex) {           
+        } catch (SQLException ex) {
             Log.write(ex.getErrorCode() + " - " + ex.getMessage());
         } finally {
             try {
@@ -205,7 +218,7 @@ public class PostgresCursoDao implements CursoDao {
             }
         }
 
-        return cursos;
+        return reservas;
     }
 
     @Override
@@ -218,7 +231,7 @@ public class PostgresCursoDao implements CursoDao {
         try {
             conn = ConnectionFactory.open();
 
-            ps = conn.prepareStatement("SELECT MAX(id) AS last_id FROM curso LIMIT 1");
+            ps = conn.prepareStatement("SELECT MAX(id) AS last_id FROM reserva LIMIT 1");
             rs = ps.executeQuery();
 
             while (rs.next()) {

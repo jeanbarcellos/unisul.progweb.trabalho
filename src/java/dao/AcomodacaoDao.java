@@ -1,14 +1,14 @@
 package dao;
 
-import model.Curso;
+import model.Acomodacao;
 import java.util.List;
 
 /**
- * Interface CursoDao
+ * Interface AcomodacaoDao
  *
  * @author Jean Barcellos <jeanbarcellos@hotmail.com>
  */
-public interface CursoDao {
+public interface AcomodacaoDao {
 
     /**
      * Inserir objeto na base de dados
@@ -16,7 +16,7 @@ public interface CursoDao {
      * @param objeto
      * @return Resultado da inserção
      */
-    public boolean insert(Curso objeto);
+    public boolean insert(Acomodacao objeto);
 
     /**
      * Alterar objeto na base de dados
@@ -24,7 +24,7 @@ public interface CursoDao {
      * @param objeto Objeto a ser alterado
      * @return
      */
-    public boolean update(Curso objeto);
+    public boolean update(Acomodacao objeto);
 
     /**
      * Apagar objeto da base de dados
@@ -39,16 +39,16 @@ public interface CursoDao {
      * instancia-o na memória
      *
      * @param id ID do objeto
-     * @return Objeto Curso
+     * @return Objeto Acomodacao
      */
-    public Curso load(int id);
+    public Acomodacao load(int id);
 
     /**
      * Recupera todos os registros da base de dados
      *
-     * @return Lista de todos os Cursos
+     * @return Lista de todos os Acomodacaos
      */
-    public List<Curso> all();
+    public List<Acomodacao> all();
 
     /**
      * Recupera o último ID cadastrado

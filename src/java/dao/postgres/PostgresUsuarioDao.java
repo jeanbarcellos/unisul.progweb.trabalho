@@ -8,11 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 import util.Log;
 
-import model.Curso;
-import dao.CursoDao;
+import model.Usuario;
+import dao.UsuarioDao;
 
 /**
- * Classe PostgresCursoDao
+ * Classe PostgresUsuarioDao
  *
  * @author Jean Barcellos <jeanbarcellos@hotmail.com>
  * @date 09/10/2016
@@ -20,19 +20,19 @@ import dao.CursoDao;
  * @package dao
  *
  */
-public class PostgresCursoDao implements CursoDao {
+public class PostgresUsuarioDao implements UsuarioDao {
 
     @Override
-    public boolean insert(Curso curso) {
+    public boolean insert(Usuario usuario) {
         Connection conn = null;
         PreparedStatement ps = null;
 
         try {
             conn = ConnectionFactory.open();
 
-            ps = conn.prepareStatement("INSERT INTO curso (id, nome) VALUES (?, ?)");
-            ps.setInt(1, curso.getId());
-            ps.setString(2, curso.getNome());
+            ps = conn.prepareStatement("INSERT INTO usuario (id, nome) VALUES (?, ?)");
+            ps.setInt(1, usuario.getId());
+            ps.setString(2, usuario.getNome());
 
             int retorno = ps.executeUpdate();
 
@@ -56,16 +56,16 @@ public class PostgresCursoDao implements CursoDao {
     }
 
     @Override
-    public boolean update(Curso curso) {
+    public boolean update(Usuario usuario) {
         Connection conn = null;
         PreparedStatement ps = null;
 
         try {
             conn = ConnectionFactory.open();
 
-            ps = conn.prepareStatement("UPDATE curso SET nome = ? WHERE id = ? ;");
-            ps.setString(1, curso.getNome());
-            ps.setInt(2, curso.getId());
+            ps = conn.prepareStatement("UPDATE usuario SET nome = ? WHERE id = ? ;");
+            ps.setString(1, usuario.getNome());
+            ps.setInt(2, usuario.getId());
 
             int retorno = ps.executeUpdate();
 
@@ -96,7 +96,7 @@ public class PostgresCursoDao implements CursoDao {
         try {
             conn = ConnectionFactory.open();
 
-            ps = conn.prepareStatement("DELETE FROM curso WHERE id = ? ;");
+            ps = conn.prepareStatement("DELETE FROM usuario WHERE id = ? ;");
             ps.setInt(1, id);
 
             int retorno = ps.executeUpdate();
@@ -121,18 +121,18 @@ public class PostgresCursoDao implements CursoDao {
     }
 
     @Override
-    public Curso load(int id) {
-        Curso curso = null;
+    public Usuario load(int id) {
+        Usuario usuario = null;
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
 
         try {
             conn = ConnectionFactory.open();
-            
             String sql = "";
-            sql += "SELECT id, nome ";
-            sql += "FROM curso ";
+
+            sql += "SELECT id, nome, email, senha, telefone ";
+            sql += "FROM usuario ";
             sql += "WHERE id = ? ";
             sql += "LIMIT 1";
 
@@ -142,9 +142,12 @@ public class PostgresCursoDao implements CursoDao {
             rs = ps.executeQuery();
             rs.next();
 
-            curso = new Curso();
-            curso.setId(rs.getInt("id"));
-            curso.setNome(rs.getString("nome"));
+            usuario = new Usuario();
+            usuario.setId(rs.getInt("id"));
+            usuario.setNome(rs.getString("nome"));
+            usuario.setEmail(rs.getString("email"));
+            usuario.setSenha(rs.getString("senha"));
+            usuario.setTelefone(rs.getString("telefone"));
 
         } catch (SQLException ex) {
             Log.write(ex.getErrorCode() + " - " + ex.getMessage());
@@ -164,12 +167,12 @@ public class PostgresCursoDao implements CursoDao {
             }
         }
 
-        return curso;
+        return usuario;
     }
 
     @Override
-    public List<Curso> all() {
-        List<Curso> cursos = new ArrayList<Curso>();
+    public List<Usuario> all() {
+        List<Usuario> usuarios = new ArrayList<Usuario>();
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -177,17 +180,20 @@ public class PostgresCursoDao implements CursoDao {
         try {
             conn = ConnectionFactory.open();
 
-            ps = conn.prepareStatement("SELECT id, nome FROM curso ORDER BY id");
+            ps = conn.prepareStatement("SELECT id, nome, email, senha, telefone FROM usuario ORDER BY id");
             rs = ps.executeQuery();
 
             while (rs.next()) {
-                Curso curso = new Curso();
-                curso.setId(rs.getInt("id"));
-                curso.setNome(rs.getString("nome"));
-                cursos.add(curso);
+                Usuario usuario = new Usuario();
+                usuario.setId(rs.getInt("id"));
+                usuario.setNome(rs.getString("nome"));
+                usuario.setEmail(rs.getString("email"));
+                usuario.setSenha(rs.getString("senha"));
+                usuario.setTelefone(rs.getString("telefone"));
+                usuarios.add(usuario);
             }
 
-        } catch (SQLException ex) {           
+        } catch (SQLException ex) {
             Log.write(ex.getErrorCode() + " - " + ex.getMessage());
         } finally {
             try {
@@ -205,7 +211,7 @@ public class PostgresCursoDao implements CursoDao {
             }
         }
 
-        return cursos;
+        return usuarios;
     }
 
     @Override
@@ -218,7 +224,7 @@ public class PostgresCursoDao implements CursoDao {
         try {
             conn = ConnectionFactory.open();
 
-            ps = conn.prepareStatement("SELECT MAX(id) AS last_id FROM curso LIMIT 1");
+            ps = conn.prepareStatement("SELECT MAX(id) AS last_id FROM usuario LIMIT 1");
             rs = ps.executeQuery();
 
             while (rs.next()) {

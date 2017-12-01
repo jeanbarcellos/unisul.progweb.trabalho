@@ -8,11 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 import util.Log;
 
-import model.Curso;
-import dao.CursoDao;
+import model.Acomodacao;
+import dao.AcomodacaoDao;
 
 /**
- * Classe PostgresCursoDao
+ * Classe PostgresAcomodacaoDao
  *
  * @author Jean Barcellos <jeanbarcellos@hotmail.com>
  * @date 09/10/2016
@@ -20,19 +20,19 @@ import dao.CursoDao;
  * @package dao
  *
  */
-public class PostgresCursoDao implements CursoDao {
+public class PostgresAcomodacaoDao implements AcomodacaoDao {
 
     @Override
-    public boolean insert(Curso curso) {
+    public boolean insert(Acomodacao acomodacao) {
         Connection conn = null;
         PreparedStatement ps = null;
 
         try {
             conn = ConnectionFactory.open();
 
-            ps = conn.prepareStatement("INSERT INTO curso (id, nome) VALUES (?, ?)");
-            ps.setInt(1, curso.getId());
-            ps.setString(2, curso.getNome());
+            ps = conn.prepareStatement("INSERT INTO acomodacao (id, nome) VALUES (?, ?)");
+            ps.setInt(1, acomodacao.getId());
+//            ps.setString(2, acomodacao.getNome());
 
             int retorno = ps.executeUpdate();
 
@@ -56,16 +56,16 @@ public class PostgresCursoDao implements CursoDao {
     }
 
     @Override
-    public boolean update(Curso curso) {
+    public boolean update(Acomodacao acomodacao) {
         Connection conn = null;
         PreparedStatement ps = null;
 
         try {
             conn = ConnectionFactory.open();
 
-            ps = conn.prepareStatement("UPDATE curso SET nome = ? WHERE id = ? ;");
-            ps.setString(1, curso.getNome());
-            ps.setInt(2, curso.getId());
+            ps = conn.prepareStatement("UPDATE acomodacao SET nome = ? WHERE id = ? ;");
+//            ps.setString(1, acomodacao.getNome());
+            ps.setInt(2, acomodacao.getId());
 
             int retorno = ps.executeUpdate();
 
@@ -96,7 +96,7 @@ public class PostgresCursoDao implements CursoDao {
         try {
             conn = ConnectionFactory.open();
 
-            ps = conn.prepareStatement("DELETE FROM curso WHERE id = ? ;");
+            ps = conn.prepareStatement("DELETE FROM acomodacao WHERE id = ? ;");
             ps.setInt(1, id);
 
             int retorno = ps.executeUpdate();
@@ -121,18 +121,17 @@ public class PostgresCursoDao implements CursoDao {
     }
 
     @Override
-    public Curso load(int id) {
-        Curso curso = null;
+    public Acomodacao load(int id) {
+        Acomodacao acomodacao = null;
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
 
         try {
             conn = ConnectionFactory.open();
-            
             String sql = "";
-            sql += "SELECT id, nome ";
-            sql += "FROM curso ";
+            sql += "SELECT id, titulo, endereco, cep, bairro, uf, descricao, numero_pessoas, data_inicio, data_fim, id_cliente ";
+            sql += "FROM acomodacao ";
             sql += "WHERE id = ? ";
             sql += "LIMIT 1";
 
@@ -142,9 +141,18 @@ public class PostgresCursoDao implements CursoDao {
             rs = ps.executeQuery();
             rs.next();
 
-            curso = new Curso();
-            curso.setId(rs.getInt("id"));
-            curso.setNome(rs.getString("nome"));
+            acomodacao = new Acomodacao();
+            acomodacao.setId(rs.getInt("id"));
+            acomodacao.setTitulo(rs.getString("titulo"));
+            acomodacao.setEndereco(rs.getString("endereco"));
+            acomodacao.setCep(rs.getString("cep"));
+            acomodacao.setBairro(rs.getString("bairro"));
+            acomodacao.setUf(rs.getString("uf"));
+            acomodacao.setDescricao(rs.getString("descricao"));
+            acomodacao.setNumeroPessoas(Integer.parseInt(rs.getString("numero_pessoas")));
+            acomodacao.setDataInicio(rs.getDate("data_inicio"));
+            acomodacao.setDataFim(rs.getDate("data_fim"));
+            acomodacao.setIdCliente(Integer.parseInt(rs.getString("id_cliente")));
 
         } catch (SQLException ex) {
             Log.write(ex.getErrorCode() + " - " + ex.getMessage());
@@ -164,12 +172,12 @@ public class PostgresCursoDao implements CursoDao {
             }
         }
 
-        return curso;
+        return acomodacao;
     }
 
     @Override
-    public List<Curso> all() {
-        List<Curso> cursos = new ArrayList<Curso>();
+    public List<Acomodacao> all() {
+        List<Acomodacao> acomodacaos = new ArrayList<Acomodacao>();
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -177,17 +185,31 @@ public class PostgresCursoDao implements CursoDao {
         try {
             conn = ConnectionFactory.open();
 
-            ps = conn.prepareStatement("SELECT id, nome FROM curso ORDER BY id");
+            String sql = "";
+            sql += "SELECT id, titulo, endereco, cep, bairro, uf, descricao, numero_pessoas, data_inicio, data_fim, id_cliente ";
+            sql += "FROM acomodacao ";
+            sql += "ORDER BY id";
+
+            ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
 
             while (rs.next()) {
-                Curso curso = new Curso();
-                curso.setId(rs.getInt("id"));
-                curso.setNome(rs.getString("nome"));
-                cursos.add(curso);
+                Acomodacao acomodacao = new Acomodacao();
+                acomodacao.setId(rs.getInt("id"));
+                acomodacao.setTitulo(rs.getString("titulo"));
+                acomodacao.setEndereco(rs.getString("endereco"));
+                acomodacao.setCep(rs.getString("cep"));
+                acomodacao.setBairro(rs.getString("bairro"));
+                acomodacao.setUf(rs.getString("uf"));
+                acomodacao.setDescricao(rs.getString("descricao"));
+                acomodacao.setNumeroPessoas(Integer.parseInt(rs.getString("numero_pessoas")));
+                acomodacao.setDataInicio(rs.getDate("data_inicio"));
+                acomodacao.setDataFim(rs.getDate("data_fim"));
+                acomodacao.setIdCliente(Integer.parseInt(rs.getString("id_cliente")));
+                acomodacaos.add(acomodacao);
             }
 
-        } catch (SQLException ex) {           
+        } catch (SQLException ex) {
             Log.write(ex.getErrorCode() + " - " + ex.getMessage());
         } finally {
             try {
@@ -205,7 +227,7 @@ public class PostgresCursoDao implements CursoDao {
             }
         }
 
-        return cursos;
+        return acomodacaos;
     }
 
     @Override
@@ -218,7 +240,7 @@ public class PostgresCursoDao implements CursoDao {
         try {
             conn = ConnectionFactory.open();
 
-            ps = conn.prepareStatement("SELECT MAX(id) AS last_id FROM curso LIMIT 1");
+            ps = conn.prepareStatement("SELECT MAX(id) AS last_id FROM acomodacao LIMIT 1");
             rs = ps.executeQuery();
 
             while (rs.next()) {

@@ -33,15 +33,7 @@ public class ConnectionFactory {
         String port = "5432";
         String user = "postgres";
         String password = "postgres";
-        String database = "biblioteca";
-
-//        Config config = Config.getInstance();
-//        String server = config.getValue("server");
-//        String host = config.getValue("host");
-//        String port = config.getValue("port");
-//        String user = config.getValue("user");
-//        String password = config.getValue("password");
-//        String database = config.getValue("database");
+        String database = "unisul_progweb_trabalho";
 
         try {
             Class.forName("org.postgresql.Driver");
@@ -56,3 +48,13 @@ public class ConnectionFactory {
         return conn;
     }
 }
+
+
+
+//        Config config = Config.getInstance();
+//        String server = config.getValue("server");
+//        String host = config.getValue("host");
+//        String port = config.getValue("port");
+//        String user = config.getValue("user");
+//        String password = config.getValue("password");
+//        String database = config.getValue("database");

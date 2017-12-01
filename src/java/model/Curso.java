@@ -1,5 +1,7 @@
 package model;
 
+import util.Json;
+
 /**
  * Modelo Curso
  *
@@ -112,7 +114,8 @@ public class Curso {
 
     @Override
     public String toString() {
-        return "Curso {" + "id: " + id + ", nome: " + nome + "}";
+        return Json.encode(this);
+//        return "Curso {" + "id: " + id + ", nome: " + nome + "}";
     }
 
 }
