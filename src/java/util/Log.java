@@ -30,6 +30,7 @@ public final class Log {
      */
     static public void write(String mensagem) {
         System.err.println(mensagem);
+        
 //
 //        String arquivo = Config.getInstance().getValue("logErros");
 //

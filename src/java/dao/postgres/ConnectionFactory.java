@@ -25,7 +25,6 @@ public class ConnectionFactory {
     public static Connection open() throws Exception {
 
         Connection conn = null;
-        Config config = Config.getInstance();
 
         String server = "postgresql";
         String host = "localhost";
@@ -34,6 +33,7 @@ public class ConnectionFactory {
         String password = "postgres";
         String database = "biblioteca";
 
+//        Config config = Config.getInstance();
 //        String server = config.getValue("server");
 //        String host = config.getValue("host");
 //        String port = config.getValue("port");

@@ -10,23 +10,20 @@
     <title>JSP Page</title>
   </head>
   <body>
+    <h1>Cursos!</h1>
     <%
         CursoDao dao = new PostgresCursoDao();
 
         List<Curso> cursos = dao.all();
-        
+
         System.out.print(cursos);
-//
-//        for (Curso curso : cursos) {
-////            System.out.println(curso);
-//        }
+
+        for (Curso curso : cursos) {
+    %>
+    Nome: <%= curso.getNome()%> <br>
+    <%
+        }
 
     %>
-    <h1>Hello World!</h1>
-    <% 
-        String nome = request.getParameter("nome");
-    %>
-    Nome: <%= nome %>
-
   </body>
 </html>
