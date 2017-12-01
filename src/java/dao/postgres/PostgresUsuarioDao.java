@@ -30,9 +30,12 @@ public class PostgresUsuarioDao implements UsuarioDao {
         try {
             conn = ConnectionFactory.open();
 
-            ps = conn.prepareStatement("INSERT INTO usuario (id, nome) VALUES (?, ?)");
+            ps = conn.prepareStatement("INSERT INTO usuario (id, nome, email, senha, telefone) VALUES (?, ?, ?, ?, ?)");
             ps.setInt(1, usuario.getId());
             ps.setString(2, usuario.getNome());
+            ps.setString(3, usuario.getEmail());
+            ps.setString(4, usuario.getSenha());
+            ps.setString(5, usuario.getTelefone());
 
             int retorno = ps.executeUpdate();
 
@@ -65,6 +68,7 @@ public class PostgresUsuarioDao implements UsuarioDao {
 
             ps = conn.prepareStatement("UPDATE usuario SET nome = ? WHERE id = ? ;");
             ps.setString(1, usuario.getNome());
+            
             ps.setInt(2, usuario.getId());
 
             int retorno = ps.executeUpdate();

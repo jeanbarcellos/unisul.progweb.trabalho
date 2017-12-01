@@ -7,7 +7,7 @@
 
           <!--<div class="col-lg-6 col-md-4 col-sm-3 site-name-container">-->
           <div class="col-lg-5 col-md-4 col-sm-3 site-name-container">
-            <a href="javascript:void(0);" class="site-name">Hosting Friend</a>
+            <a href="index.jsp" class="site-name">Hosting Friend</a>
           </div>
 
           <div class="col-lg-4 col-md-4 col-sm-3">
@@ -16,7 +16,7 @@
             </div>
             <nav class="nav">
               <ul>
-                <li><a href="index.html" class="active">Início</a></li>
+                <li><a href="index.jsp">Início</a></li>
                 <li><a href="javascript:void(0);">Como funciona</a></li>
                 <li><a href="javascript:void(0);">Dúvidas</a></li>
               </ul>
@@ -24,8 +24,9 @@
           </div>
           
           <div class="col-lg-3 col-md-2 col-sm-2">
-            <div class="user-menu">              
-            </div>
+<!--            <div class="user-menu">              
+            </div>-->
+            
           </div>
         </div>
       </div>

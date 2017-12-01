@@ -4,9 +4,9 @@
 */
 
 
-/* 
- RESET CSS *********************************************************************
-*/ 
+/*------------------------------------------------------------------------------
+  RESET CSS
+------------------------------------------------------------------------------*/
 ul,p {
     margin: 0; 
     padding: 0;
@@ -26,6 +26,35 @@ a:focus {
 body {overflow-x: hidden;
 }
 
+
+/* Corrigr transparencia placeloader nos forms */
+::-webkit-input-placeholder {opacity:1; filter:alpha(opacity=200); -moz-opacity:1.0;}
+:-moz-placeholder {opacity:0.1; filter:alpha(opacity=200); -moz-opacity:1.0;}
+::-moz-placeholder {opacity:0.1; filter:alpha(opacity=200); -moz-opacity:1.0;}
+:-ms-input-placeholder {opacity:0.1; filter:alpha(opacity=200); -moz-opacity:1.0;}
+
+/*------------------------------------------------------------------------------
+  CLASSES PRE-DEFINIDAS
+------------------------------------------------------------------------------*/
+
+
+
+/* bgs */
+.black-bg { 
+    background-color: #000; 
+}
+.gray-bg { 
+    background-color: #E5E5E5; 
+}
+.white-bg {
+    background-color: #fff;
+}
+
+
+/*------------------------------------------------------------------------------
+  SITE
+------------------------------------------------------------------------------*/
+
 /* TOPO */
 .header {
     background: #000000;
@@ -33,7 +62,9 @@ body {overflow-x: hidden;
     position: relative;
     z-index: 100;
 }
-.site-name-container { padding-top: 20px; }
+.site-name-container { 
+    padding-top: 20px; 
+}
 .site-name {
     color: #FCDD44;
     font-size: 27px;
@@ -44,9 +75,10 @@ body {overflow-x: hidden;
 .site-name:focus {
     color: #FF720B;
 }
+
 .mobile-menu-icon { display: none; }
 
-/* MENU */
+/* MENU ********************************************************************* */
 .nav {
     margin-top: 20px;
     display: block;
@@ -79,7 +111,7 @@ body {overflow-x: hidden;
     height: 35px;    
 }
 
-/* SLIDER */
+/* SLIDER ********************************************************************* */
 .banner-inner {
     height: auto;
     margin: auto;
@@ -115,7 +147,9 @@ body {overflow-x: hidden;
     font-weight: 600;
 }
 .banner-subtitle { font-size: 34px; }
-.yellow-text { color: #FCDD44; }
+.yellow-text { 
+    color: #FCDD44; 
+}
 .banner-link {
     background: rgba(252, 221, 68, 0.39) none repeat scroll 0% 0%;
     border: 1px solid #D2B731;
@@ -131,6 +165,7 @@ body {overflow-x: hidden;
     background: rgba(252, 221, 68, 1);
     color: #000;
 }
+
 .flexslider.flexslider-banner {
     max-width: 100%;
     height: 100%;
@@ -146,10 +181,83 @@ body {overflow-x: hidden;
     height: 50px;
 }
 
-/* Section 1, index.html */
-.gray-bg { 
-    background-color: #E5E5E5; 
+/* Flexslider */
+.flex-caption,
+.flexslider.flexslider .slides img {
+    float: left;
 }
+.flex-caption {
+    width: 572px;
+    padding: 40px;
+    left: 0;
+    bottom: 0;
+    font-size: 14px;
+    line-height: 18px;
+}
+.flexslider.flexslider-banner .slides img { 
+    display: block;
+    width: 100%; 
+}
+.flexslider {
+    border: none;
+    border-radius: 0;
+    margin: 0 auto;	
+    width: 100%;
+}
+.flexslider.flexslider-about {
+    max-width: 1100px;
+}
+.flexslider.flexslider-about img {
+    max-width: 528px;
+}
+.slider-title {
+    font-style: italic;
+    font-weight: 600;
+    margin-bottom: 25px;
+    text-transform: uppercase;
+}
+.slider-subtitle {
+    font-size: 18px;
+    margin-bottom: 30px;
+    text-align: left;
+}
+.slider-description {
+    color: #B1B1B1;
+    line-height: 1.6;
+    margin-bottom: 40px;
+    text-align: justify;
+}
+.slider-social { text-align: right; }
+
+
+
+/* Footer ******************************************************************* */
+.copyright-text {
+    color: white;
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.copyright-text a {
+    color: #FCDD44;
+}
+.copyright-text a:hover {
+    color: white;
+}
+
+
+
+
+.hotel-search-form .form-group {
+    margin-bottom: 30px; 
+}
+
+
+
+
+
+
+/* Section 1, index.html */
 
 /* BUSCA */
 .home-section-1 {
@@ -158,43 +266,14 @@ body {overflow-x: hidden;
 }
 
 .search-box {
-    
-}
 
-.form-control {	border-radius: 0; }
+}
+.form-control {
+    border-radius: 0; 
+}
 .form-control:focus {
     border-color: #FCDD44;
     box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset, 0px 0px 8px rgba(252, 221, 68, 0.6);
-}
-
-.yellow-gradient-bg {
-    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#f5d11d+0,f3d10e+1,efcf1c+2,fccd0d+4,f7ca0d+5,f9cb1e+6,f7cb10+7,f8cc14+8,f0c40c+54,edc50c+55,e9c108+71,ecc008+78,e6be06+91,e9bd06+93,e8bc06+100 */
-    background: #f5d11d; /* Old browsers */ /* FF3.6+ */ /* Chrome,Safari4+ */ /* Chrome10+,Safari5.1+ */ /* Opera 11.10+ */ /* IE10+ */
-    background: linear-gradient(to bottom,  #f5d11d 0%,#f3d10e 1%,#efcf1c 2%,#fccd0d 4%,#f7ca0d 5%,#f9cb1e 6%,#f7cb10 7%,#f8cc14 8%,#f0c40c 54%,#edc50c 55%,#e9c108 71%,#ecc008 78%,#e6be06 91%,#e9bd06 93%,#e8bc06 100%); /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f5d11d', endColorstr='#e8bc06',GradientType=0 ); /* IE6-9 */
-}
-.green-gradient-bg {
-    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#2ec66b+0,2dc970+1,2ac96c+2,2bc76e+4,2bc869+5,2ac871+6,29c86c+7,28c76b+15,2bc76c+16,21bb61+73,1eb860+100 */
-    background: #2ec66b; /* Old browsers */ /* FF3.6+ */ /* Chrome,Safari4+ */ /* Chrome10+,Safari5.1+ */ /* Opera 11.10+ */ /* IE10+ */
-    background: linear-gradient(to bottom,  #2ec66b 0%,#2dc970 1%,#2ac96c 2%,#2bc76e 4%,#2bc869 5%,#2ac871 6%,#29c86c 7%,#28c76b 15%,#2bc76c 16%,#21bb61 73%,#1eb860 100%); /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2ec66b', endColorstr='#1eb860',GradientType=0 ); /* IE6-9 */
-}
-.red-gradient-bg {
-    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#e97262+0,ef6865+1,ed6c5f+2,f07162+4,f17062+5,eb6f67+6,ec6c5f+7,ec6b5e+18,eb5d4f+56,e95242+100 */
-    background: #e97262; /* Old browsers */ /* FF3.6+ */ /* Chrome,Safari4+ */ /* Chrome10+,Safari5.1+ */ /* Opera 11.10+ */ /* IE10+ */
-    background: linear-gradient(to bottom,  #e97262 0%,#ef6865 1%,#ed6c5f 2%,#f07162 4%,#f17062 5%,#eb6f67 6%,#ec6c5f 7%,#ec6b5e 18%,#eb5d4f 56%,#e95242 100%); /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e97262', endColorstr='#e95242',GradientType=0 ); /* IE6-9 */
-}
-.yellow-gradient-bg,
-.green-gradient-bg,
-.red-gradient-bg {
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-align-items: center;
-    -ms-flex-align: center;
-    align-items: center;
-    height: 88px;
 }
 
 .city-price-container {
@@ -224,40 +303,14 @@ body {overflow-x: hidden;
 .yellow-btn:focus {
     background-color: #F9E58B;
 }
-.form-inner { padding: 35px 30px 5px; }
 
-/*==================================================
- * Effect 2
- * ===============================================*/
-.effect2 {
-    position: relative;
+.form-inner { 
+    padding: 35px 30px 5px; 
 }
-.effect2:before, .effect2:after {
-    z-index: -1;
-    position: absolute;
-    content: "";
-    bottom: 15px;
-    left: 10px;
-    width: 50%;
-    top: 80%;
-    max-width:160px;
-    background: #777;
-    box-shadow: 0 15px 10px #777;
-    -webkit-transform: rotate(-3deg);
-    transform: rotate(-3deg);
-}
-.effect2:after {
-    -webkit-transform: rotate(3deg);
-    transform: rotate(3deg);
-    right: 10px;
-    left: auto;
-}
-.white-bg {
-    background-color: #fff;
-}
+
 .home-box-1 {
     width: 100%;
-/*    height: 436px;*/
+    /*    height: 436px;*/
 }
 .home-box-1-center {
     margin: 0 auto;
@@ -267,62 +320,21 @@ body {overflow-x: hidden;
     margin-left: auto;
 }
 .input-group-addon { border-radius: 0; }
-#hotelCarTabs {
-    border-bottom: none;
-    height: 52px;
-}
-#hotelCarTabs li {
-    width: 50%;
-    height: 100%;
-}
-#hotelCarTabs > li > a {
-    margin-right: 0;
-    padding-top: 15px;
-    padding-bottom: 15px;
-    text-align: center;
-    text-transform: uppercase;
-    background: transparent linear-gradient(to bottom, #F5D11D 0%, #F3D10E 1%, #EFCF1C 2%, #FCCD0D 4%, #F7CA0D 5%, #F9CB1E 6%, #F7CB10 7%, #F8CC14 8%, #F0C40C 54%, #EDC50C 55%, #E9C108 71%, #ECC008 78%, #E6BE06 91%, #E9BD06 93%, #E8BC06 100%) repeat scroll 0% 0%;
-    border: none;
-    border-radius: 0;
-    color: #5C4905;
-    font-weight: 600;
-}
-#hotelCarTabs > li > a:hover,
-#hotelCarTabs > li > a:focus {
-    border: none;
-    background: #F9E58B;
-}
-#hotelCarTabs > li.active > a, 
-#hotelCarTabs > li.active > a:focus, 
-#hotelCarTabs > li.active > a:hover
-{
-    background: transparent;
-    border: none;	
-}
 
-/* Footer */
-.black-bg { background-color: #000; }
-.copyright-text {
-    color: white;
-    text-align: center;
-    padding-top: 20px;
-    padding-bottom: 20px;
-}
-.copyright-text a {
-    color: #FCDD44;
-}
 
-.copyright-text a:hover {
-    color: white;
-}
 
-.hotel-search-form .form-group { margin-bottom: 30px; }
+
+
+
+
 
 /*Section 2, index.html */
 .section-margin-top { 
     margin-top: 70px; /*100px*/
 } 
-hr { border-top: 1px solid #111010; }
+hr { 
+    border-top: 1px solid #111010; 
+}
 .section-header {
     margin-bottom: 70px;
     overflow: hidden;
@@ -584,53 +596,6 @@ hr { border-top: 1px solid #111010; }
     padding-bottom: 10px;
 }
 
-/* Flexslider */
-.flex-caption,
-.flexslider.flexslider .slides img {
-    float: left;
-}
-.flex-caption {
-    width: 572px;
-    padding: 40px;
-    left: 0;
-    bottom: 0;
-    font-size: 14px;
-    line-height: 18px;
-}
-.flexslider.flexslider-banner .slides img { 
-    display: block;
-    width: 100%; 
-}
-.flexslider {
-    border: none;
-    border-radius: 0;
-    margin: 0 auto;	
-    width: 100%;
-}
-.flexslider.flexslider-about {
-    max-width: 1100px;
-}
-.flexslider.flexslider-about img {
-    max-width: 528px;
-}
-.slider-title {
-    font-style: italic;
-    font-weight: 600;
-    margin-bottom: 25px;
-    text-transform: uppercase;
-}
-.slider-subtitle {
-    font-size: 18px;
-    margin-bottom: 30px;
-    text-align: left;
-}
-.slider-description {
-    color: #B1B1B1;
-    line-height: 1.6;
-    margin-bottom: 40px;
-    text-align: justify;
-}
-.slider-social { text-align: right; }
 
 /* Contact */
 .contact-box-1 {

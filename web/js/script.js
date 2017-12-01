@@ -5,15 +5,38 @@ $(document).ready(function () {
         $('.nav').toggleClass('show');
     });
 
+});
 
-    $('body').bind('touchstart', function () {});
+
+// COmponente de calendário
+$(function () {
+    $('.date').datetimepicker({format: 'MM/DD/YYYY'});
+});
+
+// Slider
+$(window).load(function () {
+    $('.flexslider').flexslider({
+        controlNav: false
+    });
 });
 
 
 
 function validarFormBusca() {
+    var paraOnde = $("#form-para-onde");
+    var dataChegada = $("#form-data-chegada");
+    var dataSaida = $("#form-data-saida");
+    var quantidade = $("#form-quantidade");
 
-    alert("funcionando");
+//    // Validação dos dados obrigatórios
+//    if (paraOnde.val() == "") {
+//        alert('Você deve informar para onde desejas viajar');
+//        paraOnde.focus();
+//        return false;
+//    }
 
+    url = "quartos-busca.jsp";
+
+    location.href = url;
 
 }

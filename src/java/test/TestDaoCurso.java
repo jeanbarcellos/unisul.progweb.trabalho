@@ -7,6 +7,7 @@ import dao.CursoDao;
 import dao.postgres.PostgresCursoDao;
 import java.util.List;
 import model.Curso;
+import model.Reserva;
 import util.Json;
 
 /**
@@ -20,16 +21,15 @@ public class TestDaoCurso {
 
         CursoDao dao = new PostgresCursoDao();
 
-        List<Curso> cursos = dao.all();
+        List<Curso> cursos = dao.all();      
         
-//        Json json = new Json();        
-        String retorno = Json.encode(cursos);
-        
+        String retorno = Json.encode(cursos);        
         System.out.println(retorno);
+        
+        Curso curso = dao.load(1);
+        String retorno2 = Json.encode(curso);
+        System.out.println(retorno2);        
 
-//        for (Curso curso : cursos) {
-//            System.out.println(curso.getNome());
-//        }
 
     }
 

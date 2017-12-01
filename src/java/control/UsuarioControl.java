@@ -47,10 +47,16 @@ public class UsuarioControl {
 
         int id = Integer.parseInt(request.getParameter("id"));
         String nome = request.getParameter("nome");
+        String email = request.getParameter("email");
+        String senha = request.getParameter("senha");
+        String telefone = request.getParameter("telefone");
 
         Usuario objeto = new Usuario();
         objeto.setId(id);
         objeto.setNome(nome);
+        objeto.setEmail(email);
+        objeto.setSenha(senha);
+        objeto.setTelefone(telefone);
 
         boolean persiste = this.dao.insert(objeto);
 
