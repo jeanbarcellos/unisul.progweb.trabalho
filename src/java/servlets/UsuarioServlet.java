@@ -1,24 +1,22 @@
 package servlets;
 
-import control.CursoControl;
+import control.UsuarioControl;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.Curso;
 import util.Json;
 
 /**
  *
  * @author Jean Barcellos <jeanbarcellos@hotmail.com>
  */
-@WebServlet(name = "CursoServlet", urlPatterns = {"/webservice-curso"})
+@WebServlet(name = "UsuarioServlet", urlPatterns = {"/webservice-usuario"})
 
-public class CursoServlet extends HttpServlet {
+public class UsuarioServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -29,23 +27,14 @@ public class CursoServlet extends HttpServlet {
 
         PrintWriter out = response.getWriter();
 
-        CursoControl control = new CursoControl(request, response);
+        UsuarioControl control = new UsuarioControl(request, response);
 
         if (action != null) {
 
             switch (action) {
 
                 case "inserir": {
-                    String retorno = "";
-
-                    boolean persiste = control.inserir();
-                    
-                    if (persiste) {
-                        retorno = Json.toJsonReturn(true, "Registro inserindo com sucesso");
-                    } else {
-                        retorno = Json.toJsonReturn(false, "Erro ao tentar inserir registro");
-                    }
-
+                    String retorno = control.inserir();
                     out.print(retorno);
                     break;
                 }
@@ -60,14 +49,12 @@ public class CursoServlet extends HttpServlet {
                     break;
                 }
                 case "listar": {
-                    List<Curso> objetos = control.listar();
-                    String retorno = Json.encode(objetos);
+                    String retorno = control.listar();
                     out.print(retorno);
                     break;
                 }
                 case "ver": {
-                    Curso objeto = control.getObjeto();
-                    String retorno = Json.encode(objeto);
+                    String retorno = control.getObjeto();
                     out.print(retorno);
                     break;
                 }

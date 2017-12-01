@@ -1,16 +1,16 @@
 package control;
 
-import dao.CursoDao;
-import dao.postgres.PostgresCursoDao;
+import dao.UsuarioDao;
+import dao.postgres.PostgresUsuarioDao;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.Curso;
+import model.Usuario;
 import util.Json;
 import util.JsonRetorno;
 
 /**
- * Classe CursoControl
+ * Classe UsuarioControl
  *
  * @author Jean Barcellos <jeanbarcellos@hotmail.com>
  * @date 01/12/2017
@@ -18,7 +18,7 @@ import util.JsonRetorno;
  * @package control
  *
  */
-public class CursoControl {
+public class UsuarioControl {
 
     /**
      * Request
@@ -28,32 +28,38 @@ public class CursoControl {
     private HttpServletResponse response;
 
     /**
-     * DAO da Entidade Curso
+     * DAO da Entidade Usuario
      */
-    private CursoDao dao = new PostgresCursoDao();
+    private UsuarioDao dao = new PostgresUsuarioDao();
 
     /**
      * Interpretador Jbon
      */
     private Json json = new Json();
 
-    public CursoControl(HttpServletRequest request, HttpServletResponse response) {
+    public UsuarioControl(HttpServletRequest request, HttpServletResponse response) {
         this.request = request;
         this.response = response;
     }
 
-    public boolean inserir() {
-        boolean retorno;
+    public String inserir() {
+        String retorno = "";
 
         int id = Integer.parseInt(request.getParameter("id"));
         String nome = request.getParameter("nome");
 
-        Curso objeto = new Curso();
+        Usuario objeto = new Usuario();
         objeto.setId(id);
         objeto.setNome(nome);
-        
-        retorno = this.dao.insert(objeto);
-                
+
+        boolean persiste = this.dao.insert(objeto);
+
+        if (persiste) {
+            retorno = Json.toJsonReturn(true, "Registro inserindo com sucesso");
+        } else {
+            retorno = Json.toJsonReturn(false, "Erro ao tentar inserir registro");
+        }
+
         return retorno;
     }
 
@@ -63,7 +69,7 @@ public class CursoControl {
         int id = Integer.parseInt(request.getParameter("id"));
         String nome = request.getParameter("nome");
 
-        Curso objeto = this.dao.load(id);
+        Usuario objeto = this.dao.load(id);
         objeto.setId(id);
         objeto.setNome(nome);
 
@@ -99,16 +105,42 @@ public class CursoControl {
         return retorno;
     }
 
-    public List<Curso>  listar() {
-        List<Curso> objetos = null;
+    public String listar() {
+
+        List<Usuario> objetos = this.dao.all();
+
+        String retorno = this.json.toJson(objetos);
+
+        return retorno;
+    }
+
+    public String getObjeto() {
+        String retorno = "";
+
+        int id = Integer.parseInt(request.getParameter("id"));
+
+        Usuario objeto = this.dao.load(id);
+
+        if (objeto != null) {
+            retorno = this.json.toJson(objeto);
+            return retorno;
+        } else {
+            retorno = Json.toJsonReturn(false, "Erro ao tentar alterar registro");
+        }
+
+        return retorno;
+    }
+
+    public List<Usuario> pageListar() {
+        List<Usuario> objetos = null;
         objetos = this.dao.all();
         return objetos;
     }
-
-    public Curso getObjeto() {
-        Curso objeto = null;
+    
+    public Usuario pageGetObjeto() {        
+        Usuario objeto = null;
         int id = Integer.parseInt(request.getParameter("id"));
-        objeto = this.dao.load(id);
+        objeto = this.dao.load(id);       
         return objeto;
     }
 
