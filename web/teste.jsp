@@ -10,6 +10,9 @@
     <title>JSP Page</title>
   </head>
   <body>
+    
+    <%@include file="includes/cabecalho.jsp" %>
+    
     <h1>Cursos!</h1>
     <%
         CursoDao dao = new PostgresCursoDao();

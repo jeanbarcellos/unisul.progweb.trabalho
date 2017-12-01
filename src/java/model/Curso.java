@@ -112,7 +112,7 @@ public class Curso {
 
     @Override
     public String toString() {
-        return "Curso{" + "id=" + id + ", nome=" + nome + '}';
+        return "Curso {" + "id: " + id + ", nome: " + nome + "}";
     }
 
 }
