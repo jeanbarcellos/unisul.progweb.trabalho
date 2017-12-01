@@ -3,6 +3,8 @@ package dao.postgres;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import util.Config;
 import util.Log;
 
@@ -22,7 +24,7 @@ public class ConnectionFactory {
      *
      * @return Instância de Conexão
      */
-    public static Connection open() throws Exception {
+    public static Connection open() {
 
         Connection conn = null;
 
@@ -43,10 +45,12 @@ public class ConnectionFactory {
 
         try {
             Class.forName("org.postgresql.Driver");
-            
+
             conn = DriverManager.getConnection("jdbc:" + server + "://" + host + ":" + port + "/" + database, user, password);
         } catch (SQLException ex) {
             Log.write("Código: " + ex.getErrorCode() + "" + ex.getMessage());
+        } catch (ClassNotFoundException e) {
+            Log.write("" + e.getMessage());
         }
 
         return conn;
