@@ -5,12 +5,12 @@
       <div class="container">
         <div class="row">
 
-          <!--<div class="col-lg-6 col-md-4 col-sm-3 site-name-container">-->
-          <div class="col-lg-5 col-md-4 col-sm-3 site-name-container">
+          <div class="col-lg-6 col-md-4 col-sm-3 site-name-container">
+          <!--<div class="col-lg-5 col-md-4 col-sm-3 site-name-container">-->
             <a href="index.jsp" class="site-name">Hosting Friend</a>
           </div>
 
-          <div class="col-lg-4 col-md-4 col-sm-3">
+          <div class="col-lg-6 col-md-6 col-sm-6">
             <div class="mobile-menu-icon">
               <i class="fa fa-bars"></i>
             </div>
@@ -23,11 +23,11 @@
             </nav>
           </div>
           
-          <div class="col-lg-3 col-md-2 col-sm-2">
-<!--            <div class="user-menu">              
-            </div>-->
-            
-          </div>
+<!--          <div class="col-lg-4 col-md-2 col-sm-2">
+            <div class="user-menu">              
+            </div>            
+          </div>-->
+          
         </div>
       </div>
     </div>

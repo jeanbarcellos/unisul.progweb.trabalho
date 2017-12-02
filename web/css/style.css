@@ -89,7 +89,8 @@ body {overflow-x: hidden;
     float: left;
 }
 .nav li a {
-    color: #838383;
+    /*color: #838383;*/
+    color: #FFF;
     display: block;
     padding: 10px 20px;
     text-transform: uppercase;
@@ -229,7 +230,9 @@ body {overflow-x: hidden;
 }
 .slider-social { text-align: right; }
 
-
+.input-group-addon {
+    cursor: pointer;
+}
 
 /* Footer ******************************************************************* */
 .copyright-text {
