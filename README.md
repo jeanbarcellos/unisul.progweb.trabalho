@@ -1,8 +1,8 @@
 _Repositório apenas para o armazenamento dos arquivos e trabalhos da faculdade_
 
-# Trabalho Final - Programação Web - 7ª Fase - Unisul 2017/2
+# Trabalho Final - Programação para Web - 6ª Fase - Unisul 2017/2
 
-Parte 3 do Trabalho Final da disciplina de Programação Web - 7ª Fase - Unisul 2017/2
+Parte 3 do Trabalho Final da disciplina de Programação para Web - 6ª Fase - Unisul 2017/2
 
 ## O trabalho
 
